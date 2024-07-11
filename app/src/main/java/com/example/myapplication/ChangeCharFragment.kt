@@ -17,7 +17,7 @@ class ChangeCharFragment : Fragment() {
         R.drawable.horse_1,R.drawable.sheep_1,R.drawable.monkey_1,R.drawable.chick_1,R.drawable.dog_1,R.drawable.pig_1
     )
 
-    private val charNames = arrayOf(
+    private val names = arrayOf(
         "쥐", "소", "호랑이", "토끼", "용", "뱀", "말", "양", "원숭이", "닭", "개", "돼지"
     )
     private val descriptions = arrayOf(
@@ -48,7 +48,7 @@ class ChangeCharFragment : Fragment() {
 
         val gridView: GridView = view.findViewById(R.id.gv_change)
 
-        val adapter = ChangeCharAdapter(requireContext(), imageResources, charNames,descriptions)
+        val adapter = ChangeCharAdapter(requireContext(), imageResources, names,descriptions)
         gridView.adapter = adapter
     }
 }
