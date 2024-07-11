@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
+import android.widget.ImageView
 
 
-class ChangeChar2Fragment : Fragment() {
+class ChangeChar2Fragment : Fragment(), ItemDetailDialogFragment.ChangeListener {
 
     private val imageResources = intArrayOf(
         R.drawable.mouse_2,R.drawable.cow_2,R.drawable.tiger_2,R.drawable.rabbit_2,R.drawable.dragon_2, R.drawable.snake_2,
@@ -31,20 +32,34 @@ class ChangeChar2Fragment : Fragment() {
         "진실하고 충성스러운 아기가 될 거예요. 언제나 친구들과 함께하는 든든한 작은 수호자!",
         "풍요롭고 복이 많은 아기가 될 거예요. 웃음이 넘치고 모두에게 사랑받는 작은 행복이!"
     )
+
+    private lateinit var adapter: ChangeChar2Adapter
+    private lateinit var finishButton: ImageView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_change_char2, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val gridView: GridView = view.findViewById(R.id.gv_change)
-        val adapter = ChangeChar2Adapter(requireContext(), imageResources, names, descriptions)
+
+        finishButton = view.findViewById(R.id.finish_button)
+        adapter = ChangeChar2Adapter(requireContext(), imageResources, names, descriptions,this)
         gridView.adapter = adapter
+    }
+
+    override fun onChangeSelected(imageResourceId: Int) {
+        val position = imageResources.indexOf(imageResourceId)
+        if (position != -1) {
+            adapter.setSelectedPosition(position)
+            finishButton.visibility = View.VISIBLE
+        }
     }
 
 
