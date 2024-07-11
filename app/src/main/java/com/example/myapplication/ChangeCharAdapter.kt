@@ -43,6 +43,7 @@ class ChangeCharAdapter(
             view = convertView
             holder = view.tag as ViewHolder
         }
+        
 
         holder.imageView.setImageResource(items[position])
         holder.textView.text = charnames[position]
